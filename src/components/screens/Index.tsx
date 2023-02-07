@@ -1,4 +1,3 @@
-import { Link } from '@opengovsg/design-system-react';
 import { Head } from '~/components/shared/Head';
 
 function Index() {

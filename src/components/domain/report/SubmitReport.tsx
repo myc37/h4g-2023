@@ -1,10 +1,10 @@
 import { Box, Text } from '@chakra-ui/react';
-import { Attachment, Button, Checkbox, FormLabel, Input, Textarea, Toggle } from '@opengovsg/design-system-react';
+import { Attachment, Button, Checkbox, FormLabel, Input, Textarea } from '@opengovsg/design-system-react';
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { uploadImages } from '~/api/images';
 import { uploadReport } from '~/api/reports';
-import { Report } from '~/types/reports';
+import { ReportWithoutId } from '~/types/reports';
 
 type Props = {};
 
@@ -19,7 +19,7 @@ const SubmitReport: FC<Props> = ({}) => {
   const handleUploadReport = async () => {
     const imgFullPaths = await uploadImages(files);
 
-    const newReport: Report = {
+    const reportWithoutId: ReportWithoutId = {
       imgFullPaths,
       details,
       isLocationLatLng: isAtCurrentLocation,
@@ -28,8 +28,8 @@ const SubmitReport: FC<Props> = ({}) => {
       comments: [],
     };
 
-    const newDocId = await uploadReport(newReport);
-    navigate(`/map?id=${newDocId}`);
+    const { id } = await uploadReport(reportWithoutId);
+    navigate(`/map?id=${id}`);
   };
 
   return (

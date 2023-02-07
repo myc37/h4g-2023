@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
+import { fetchReports } from '~/api/reports';
 import { Report } from '~/types/reports';
 
 type ReportActions = {
@@ -41,7 +42,11 @@ export default function useReportState() {
   const { state, dispatch } = useContext(ReportContext);
 
   useEffect(() => {
-    dispatch({ type: 'SET_REPORTS', payload: [] });
+    const handleFetchReports = async () => {
+      const reports = await fetchReports();
+      dispatch({ type: 'SET_REPORTS', payload: reports });
+    };
+    handleFetchReports();
   }, []);
 
   return {

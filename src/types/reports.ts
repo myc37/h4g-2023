@@ -5,6 +5,7 @@ export type Comment = {
 };
 
 export type Report = {
+  id: string;
   imgFullPaths: string[];
   details: string;
   isLocationLatLng: boolean;
@@ -12,3 +13,5 @@ export type Report = {
   locationDescription: string;
   comments: Comment[];
 };
+
+export type ReportWithoutId = Omit<Report, 'id'>;
