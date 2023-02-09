@@ -1,6 +1,6 @@
 export type MarkerMetadata = {
   id: string;
-  position: google.maps.LatLngLiteral;
+  location: google.maps.LatLngLiteral;
   title?: string;
 };
 

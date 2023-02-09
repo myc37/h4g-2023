@@ -27,7 +27,7 @@ const MapWithMarkers: FC<Props> = ({}) => {
     setMarkers(markersFromDb);
 
     const bounds = new window.google.maps.LatLngBounds(center);
-    markersFromDb.forEach((marker) => bounds.extend(marker.position));
+    markersFromDb.forEach((marker) => bounds.extend(marker.location));
     map.fitBounds(bounds);
     setMap(map);
   }, []);
@@ -50,12 +50,12 @@ const MapWithMarkers: FC<Props> = ({}) => {
         onClick={onClick}
       >
         <>
-          {markers.map(({ id, position, title }) => (
+          {markers.map(({ id, location, title }) => (
             <Marker
               key={id}
-              position={position}
+              position={location}
               onClick={() => {
-                map?.panTo(position);
+                map?.panTo(location);
                 setActiveMarkerId(id);
               }}
             >
