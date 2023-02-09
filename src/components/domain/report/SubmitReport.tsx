@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { uploadImages } from '~/api/images';
 import { uploadReport } from '~/api/reports';
 import BxCurrentLocation from '~/components/icons/BxCurrentLocation';
-import { LatLng, ReportWithoutId } from '~/types/reports';
+import { ReportWithoutId } from '~/types/reports';
 
 type Props = {};
 
@@ -14,7 +14,7 @@ const SubmitReport: FC<Props> = ({}) => {
   const [files, setFiles] = useState<(File | undefined)[]>([undefined]);
   const [details, setDetails] = useState('');
   // const [isAtCurrentLocation, setIsAtCurrentLocation] = useState(false);
-  const [location, setLocation] = useState<LatLng | null>(null);
+  const [location, setLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [loadingLocation, setLoadingLocation] = useState(false);
   const [locationDescription, setLocationDescription] = useState('');
 

@@ -4,16 +4,11 @@ export type Comment = {
   createdAt: string;
 };
 
-export type LatLng = {
-  lat: number;
-  lng: number;
-};
-
 export type Report = {
   id: string;
   imgFullPaths: string[];
   details: string;
-  location: LatLng;
+  location: google.maps.LatLngLiteral;
   locationDescription: string;
   comments: Comment[];
 };
