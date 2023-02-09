@@ -13,5 +13,5 @@ interface ImportMetaEnv {
   VITE_FIREBASE_MEASUREMENTID: string;
   VITE_USE_FIREBASE_EMULATOR: string;
   VITE_API_ORIGIN: string;
-  GOOGLE_API_KEY: string;
+  VITE_GOOGLE_API_KEY: string;
 }
