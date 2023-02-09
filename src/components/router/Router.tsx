@@ -6,6 +6,7 @@ import Loading from '../shared/Loading';
 const IndexScreen = lazy(() => import('~/components/screens/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 const ReportScreen = lazy(() => import('~/components/screens/Report'));
+const MapScreen = lazy(() => import('~/components/screens/Map'));
 
 export const Router = () => {
   return (
@@ -24,6 +25,10 @@ const InnerRouter = () => {
         {
           path: '/report',
           element: <ReportScreen />,
+        },
+        {
+          path: '/map',
+          element: <MapScreen />,
         },
         {
           index: true,
