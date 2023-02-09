@@ -12,13 +12,18 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.10",
     "@opengovsg/design-system-react": "^0.1.0-alpha.8",
     "@react-google-maps/api": "^2.18.1",
+    "@types/google-map-react": "^2.1.7",
     "firebase": "^9.17.1",
+    "framer-motion": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
+    "react-markdown": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "uuid": "^9.0.0"
   },
