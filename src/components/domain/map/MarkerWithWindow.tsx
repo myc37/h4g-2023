@@ -47,13 +47,15 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
       position={location}
       onClick={() => {
         map?.panTo(location);
+        // pan up by half of (height of marker + height of info window) to center info window
+        map?.panBy(0, -120);
         setActiveMarkerId(id);
       }}
       icon={{ url: getIconUrl(type), scaledSize: new google.maps.Size(40, 40), anchor: new google.maps.Point(20, 40) }}
     >
       {id === activeMarkerId ? (
         <InfoWindow onCloseClick={() => setActiveMarkerId(null)}>
-          <Box display="flex" flexDir="column" p="4px" maxW="400px">
+          <Box display="flex" flexDir="column" p="4px" maxW="200px">
             <Text textStyle="subhead-2" noOfLines={2} mb="12px">
               {locationDescription}
             </Text>
