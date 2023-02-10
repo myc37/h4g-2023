@@ -1,10 +1,11 @@
-import { Box, Text } from '@chakra-ui/react';
-import { Attachment, Button, BxCheck, FormLabel, Input, Textarea } from '@opengovsg/design-system-react';
+import { Box, Text, Button, FormLabel, Input, Textarea } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { uploadImages } from '~/api/images';
 import { uploadReport } from '~/api/reports';
+import BxCheck from '~/components/icons/BxCheck';
 import BxCurrentLocation from '~/components/icons/BxCurrentLocation';
+import FileInput from '~/components/shared/FileInput';
 import { ReportWithoutId } from '~/types/reports';
 
 type Props = {};
@@ -53,25 +54,21 @@ const SubmitReport: FC<Props> = ({}) => {
         <FormLabel>Upload photos</FormLabel>
         <Box display="flex" flexDir="column" gap="16px">
           {files.map((file, idx) => (
-            <Attachment
+            <FileInput
               key={idx}
-              name="image upload"
-              value={file}
-              onChange={(file) => {
+              setFile={(file) => {
                 if (file) {
-                  setFiles((files) => [...files.slice(0, idx), file, ...files.slice(idx + 1), undefined]);
+                  setFiles([...files.slice(0, idx), file, ...files.slice(idx + 1), undefined]);
                 } else {
-                  setFiles((files) => [...files.slice(0, idx), ...files.slice(idx + 1)]);
+                  setFiles([...files.slice(0, idx), ...files.slice(idx + 1)]);
                 }
               }}
-              imagePreview="small"
-              accept="image/*"
             />
           ))}
         </Box>
       </Box>
       <Box>
-        <FormLabel isRequired>Provide details of the issue</FormLabel>
+        <FormLabel>Provide details of the issue</FormLabel>
         <Textarea
           value={details}
           onChange={(event) => setDetails(event.target.value)}
@@ -79,16 +76,14 @@ const SubmitReport: FC<Props> = ({}) => {
         />
       </Box>
       <Box>
-        <FormLabel mb="0" isRequired>
-          Where did you see it?
-        </FormLabel>
+        <FormLabel mb="0">Where did you see it?</FormLabel>
         <Text textStyle="caption-2" mb="8px">
           Please allow the website to acess your current location
         </Text>
         <Button
           leftIcon={location ? <BxCheck /> : <BxCurrentLocation />}
           onClick={getCurrentLocation}
-          colorScheme={location ? 'success' : 'brand.primary'}
+          colorScheme={location ? 'green' : 'primary'}
           isLoading={loadingLocation}
         >
           At my current location

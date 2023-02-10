@@ -1,15 +1,19 @@
-import { ThemeProvider } from '@opengovsg/design-system-react';
+import { extendTheme, ThemeProvider } from '@chakra-ui/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from '~/components/contexts/UserContext';
 import Main from '~/components/root/Main';
+import { colors } from '~/styles/colors';
+import { textStyles } from '~/styles/textStyles';
 import { ReportProvider } from '../contexts/ReportContext';
 
 export const App = () => {
+  const theme = extendTheme({ textStyles, colors });
+
   return (
     <HelmetProvider>
       <AuthProvider>
         <ReportProvider>
-          <ThemeProvider>
+          <ThemeProvider theme={theme}>
             <Main />
           </ThemeProvider>
         </ReportProvider>
