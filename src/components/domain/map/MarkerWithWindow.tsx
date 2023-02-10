@@ -55,7 +55,7 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
     >
       {id === activeMarkerId ? (
         <InfoWindow onCloseClick={() => setActiveMarkerId(null)}>
-          <Box display="flex" flexDir="column" p="4px" maxW="200px">
+          <Box display="flex" flexDir="column" maxW="200px">
             <Text textStyle="subhead-2" noOfLines={2} mb="12px">
               {locationDescription}
             </Text>
@@ -76,7 +76,7 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
               </Button>
               <Button size={{ base: 'xs', md: 'sm' }} flex="1 0 fit-content" colorScheme="secondary">
                 <Link href={`report/${id}`} target="_blank" rel="noreferrer">
-                  View discussion
+                  Discuss
                 </Link>
               </Button>
             </Box>
