@@ -42,5 +42,6 @@ export const unlikeReport = async (id: string) => {
 export const commentOnReport = async (id: string, comment: CommentWithoutCreatedAt) => {
   // TODO: Change to Firebase timestamp
   const commentWithCreatedAt = { ...comment, createdAt: Date.now() };
-  return await updateReport(id, { comments: arrayUnion(commentWithCreatedAt) });
+  await updateReport(id, { comments: arrayUnion(commentWithCreatedAt) });
+  return commentWithCreatedAt;
 };

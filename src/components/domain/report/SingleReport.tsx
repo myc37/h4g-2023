@@ -33,6 +33,7 @@ type Props = {
 const SingleReport: FC<Props> = ({ report }) => {
   const { details, locationDescription, id, likes, comments } = report;
   const toast = useToast();
+  const [localComments, setLocalComments] = useState(comments);
   const [currentComment, setCurrentComment] = useState('');
   const { localLikes, liked, locallyLike, locallyUnlike } = useLocalStorageLikes(id, likes);
   const { username, updateUsername } = useLocalStorageUsername(toast);
@@ -58,7 +59,8 @@ const SingleReport: FC<Props> = ({ report }) => {
       handleOpenModal();
       return;
     }
-    await commentOnReport(id, { content: currentComment, author: username });
+    const comment = await commentOnReport(id, { content: currentComment, author: username });
+    setLocalComments((localComments) => [...localComments, comment]);
     setCurrentComment('');
   };
 
@@ -134,17 +136,29 @@ const SingleReport: FC<Props> = ({ report }) => {
           >
             {`${localLikes} like${localLikes !== 1 ? 's' : ''}`}
           </Button>
-          <Button size="sm" isDisabled leftIcon={<BxComment />}>{`${comments.length} comment${
-            comments.length !== 1 ? 's' : ''
+          <Button size="sm" isDisabled leftIcon={<BxComment />}>{`${localComments.length} comment${
+            localComments.length !== 1 ? 's' : ''
           }`}</Button>
         </Box>
-        <Box display="flex" flexDir="column" my="16px" gap="12px" py="8px" px="12px" rounded="md" bg="primary.100">
-          {comments.map((comment, idx) => (
-            <Comment key={comment.createdAt} comment={comment} isLast={comments.length - 1 === idx} />
-          ))}
+        <Box display="flex" flexDir="column" my="16px" gap="12px" p="12px" rounded="md" bg="primary.100">
+          {localComments && localComments.length ? (
+            localComments.map((comment, idx) => (
+              <Comment key={comment.createdAt} comment={comment} isLast={localComments.length - 1 === idx} />
+            ))
+          ) : (
+            <Box>
+              <Text textStyle="subhead-2" textAlign="center">
+                No comments found. Why not start a discussion to create a solution?
+              </Text>
+            </Box>
+          )}
         </Box>
         <Box display="flex" gap="8px">
-          <Input value={currentComment} onChange={handleCommentChange} />
+          <Input
+            value={currentComment}
+            onChange={handleCommentChange}
+            placeholder="e.g. I can provide a ramp to improve wheelchair access!"
+          />
           <IconButton icon={<BxSend />} onClick={handleComment} aria-label="Comment" colorScheme="primary" />
         </Box>
         {username ? (
