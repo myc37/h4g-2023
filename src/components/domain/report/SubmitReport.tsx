@@ -1,12 +1,12 @@
-import { Box, Text, Button, FormLabel, Input, Textarea } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { Box, Text, Button, Input, Textarea, Select } from '@chakra-ui/react';
+import { ChangeEvent, FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { uploadImages } from '~/api/images';
 import { uploadReport } from '~/api/reports';
 import BxCheck from '~/components/icons/BxCheck';
 import BxCurrentLocation from '~/components/icons/BxCurrentLocation';
 import FileInput from '~/components/shared/FileInput';
-import { ReportWithoutId } from '~/types/reports';
+import { ReportType, reportTypes, ReportWithoutId } from '~/types/reports';
 
 type Props = {};
 
@@ -15,6 +15,7 @@ const SubmitReport: FC<Props> = ({}) => {
   const [files, setFiles] = useState<(File | undefined)[]>([undefined]);
   const [details, setDetails] = useState('');
   // const [isAtCurrentLocation, setIsAtCurrentLocation] = useState(false);
+  const [type, setType] = useState<ReportType>(reportTypes[0]);
   const [location, setLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [loadingLocation, setLoadingLocation] = useState(false);
   const [locationDescription, setLocationDescription] = useState('');
@@ -31,6 +32,7 @@ const SubmitReport: FC<Props> = ({}) => {
       details,
       location,
       locationDescription,
+      type,
       comments: [],
       likes: 0,
     };
@@ -47,6 +49,10 @@ const SubmitReport: FC<Props> = ({}) => {
       setLocation({ lat, lng });
       setLoadingLocation(false);
     });
+  };
+
+  const handleTypeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+    setType(event.target.value as ReportType);
   };
 
   return (
@@ -69,6 +75,19 @@ const SubmitReport: FC<Props> = ({}) => {
             />
           ))}
         </Box>
+      </Box>
+      <Box>
+        <Text textStyle="subhead-1">Select type of report</Text>
+        <Text textStyle="caption-2" mb="12px">
+          Who does the issue affect the most?
+        </Text>
+        <Select value={type} onChange={handleTypeSelect}>
+          {reportTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </Select>
       </Box>
       <Box>
         <Text textStyle="subhead-1" mb="12px">

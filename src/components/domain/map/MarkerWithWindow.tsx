@@ -1,7 +1,7 @@
 import { Button, Link, Text, Box } from '@chakra-ui/react';
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { Dispatch, FC, SetStateAction } from 'react';
-import { Report } from '~/types/reports';
+import { Report, ReportType, reportTypes } from '~/types/reports';
 import BxLike from '~/components/icons/BxLike';
 import BxLikeS from '~/components/icons/BxLikeS';
 import { likeReport, unlikeReport } from '~/api/reports';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId, map }) => {
-  const { id, location, details, locationDescription, imgFullPaths, likes } = report;
+  const { id, location, details, locationDescription, imgFullPaths, likes, type } = report;
   const { localLikes, liked, locallyLike, locallyUnlike } = useLocalStorageLikes(id, likes);
 
   const handleClickLike = async () => {
@@ -29,6 +29,19 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
     }
   };
 
+  const getIconUrl = (type: ReportType) => {
+    switch (type) {
+      case reportTypes[0]:
+        return '/low-mobility.png';
+      case reportTypes[1]:
+        return '/low-vision.png';
+      case reportTypes[2]:
+        return '/low-hearing.png';
+    }
+
+    return '/low-mobility.png';
+  };
+
   return (
     <Marker
       position={location}
@@ -36,6 +49,7 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
         map?.panTo(location);
         setActiveMarkerId(id);
       }}
+      icon={{ url: getIconUrl(type), scaledSize: new google.maps.Size(40, 40), anchor: new google.maps.Point(20, 40) }}
     >
       {id === activeMarkerId ? (
         <InfoWindow onCloseClick={() => setActiveMarkerId(null)}>

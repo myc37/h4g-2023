@@ -6,6 +6,9 @@ export type Comment = {
 
 export type CommentWithoutCreatedAt = Omit<Comment, 'createdAt'>;
 
+export const reportTypes = ['Mobility issues', 'Visual impairment', 'Auditory issues'] as const;
+export type ReportType = (typeof reportTypes)[number];
+
 export type Report = {
   id: string;
   imgFullPaths: string[];
@@ -14,6 +17,7 @@ export type Report = {
   locationDescription: string;
   comments: Comment[];
   likes: number;
+  type: ReportType;
 };
 
 export type ReportWithoutId = Omit<Report, 'id'>;
