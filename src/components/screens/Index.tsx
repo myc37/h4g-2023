@@ -15,7 +15,7 @@ function Index() {
           <Text textStyle="h3" color="primary.800" mb="70px">
             How does it work?
           </Text>
-          <Box display="flex" flexDir="column" gap="70px" bg="primary.100">
+          <Box display="flex" flexDir="column" gap={{ base: '80px', md: '70px' }} bg="primary.100">
             <Section
               contentSide="left"
               imgSrc="landing-1.png"

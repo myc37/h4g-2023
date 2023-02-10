@@ -1,4 +1,4 @@
-import { Grid, GridItem, Button, Link, Box, Text, BoxProps } from '@chakra-ui/react';
+import { Grid, GridItem, Box, Text, BoxProps } from '@chakra-ui/react';
 import { FC, ReactElement } from 'react';
 
 type Props = {
@@ -11,12 +11,15 @@ type Props = {
 
 const Section: FC<Props> = ({ contentSide, imgSrc, heading, content, imgClass }) => {
   return (
-    <Grid templateColumns="repeat(2, 1fr)" h="full" gap="40px">
+    <Grid templateColumns="repeat(2, 1fr)" h="full" gap={{ base: '16px', md: '40px' }}>
       {contentSide === 'right' ? (
         <GridItem colSpan={{ base: 2, md: 1 }} display={{ base: 'none', md: 'grid' }} placeItems="center">
           <Box as="img" rounded="xl" src={imgSrc} alt="image" {...imgClass} />
         </GridItem>
       ) : null}
+      <GridItem colSpan={2} display={{ base: 'grid', md: 'none' }} placeItems="center">
+        <Box as="img" rounded="xl" src={imgSrc} alt="image" {...imgClass} />
+      </GridItem>
 
       <GridItem colSpan={{ base: 2, md: 1 }} display="flex" flexDir="column" alignItems="start" justifyContent="center">
         <Box
@@ -26,7 +29,7 @@ const Section: FC<Props> = ({ contentSide, imgSrc, heading, content, imgClass })
           alignItems={{ base: 'center', md: 'start' }}
         >
           <>
-            <Text textStyle={{ md: 'h5' }} color="primary.800" textAlign={{ base: 'center', md: 'left' }}>
+            <Text textStyle={{ base: 'h5', md: 'h5' }} color="primary.800">
               {heading}
             </Text>
             {content}

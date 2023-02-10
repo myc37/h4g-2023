@@ -1,4 +1,4 @@
-import { Stack, Box, Text, Image, Heading, Grid, GridItem, Button, Link } from '@chakra-ui/react';
+import { Box, Text, Grid, GridItem, Button, Link } from '@chakra-ui/react';
 
 const Hero = () => {
   return (
@@ -29,20 +29,6 @@ const Hero = () => {
           <Box as="img" rounded="xl" src="/landing-hero.png" alt="map image" w="75%" />
         </GridItem>
       </Grid>
-      {/* <Stack flexDir="row" p={4} gap={4} alignContent="baseline">
-        <Stack alignItems="center">
-          <Image src="/low-mobility.png" alt="mobility issues" mb={2} height="60px" width="60px" />
-          <Text textAlign="center">Mobility Issues</Text>
-        </Stack>
-        <Stack alignItems="center">
-          <Image src="/low-vision.png" alt="visual impairement" mb={2} height="60px" width="60px" />
-          <Text textAlign="center">Visual Impairement</Text>
-        </Stack>
-        <Stack alignItems="center">
-          <Image src="/low-hearing.png" alt="auditory issues" mb={2} height="60px" width="60px" />
-          <Text textAlign="center">Auditory Issues</Text>
-        </Stack>
-      </Stack> */}
     </Box>
   );
 };
