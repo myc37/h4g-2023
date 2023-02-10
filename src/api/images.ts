@@ -1,4 +1,4 @@
-import { ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useStorage } from '~/lib/firebase';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,3 +13,14 @@ export const uploadImages = async (files: (File | undefined)[]) => {
 
   return imgFullPaths;
 };
+
+// export const getImageSrcFromFullPath = async (imgFullPath: string) => {
+//   const storage = useStorage();
+//   const downloadUrl = await getDownloadURL(ref(storage, imgFullPath));
+//   return downloadUrl;
+// };
+
+// export const getImgSrcsFromFullPaths = async (imgFullPaths: string[]) => {
+//   const downloadUrls = await Promise.all(imgFullPaths.map((path) => getImageSrcFromFullPath(path)));
+//   return downloadUrls;
+// };
