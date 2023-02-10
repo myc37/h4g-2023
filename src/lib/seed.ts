@@ -85,6 +85,70 @@ export const dummyReports: ReportWithoutId[] = [
   },
 ];
 
+export const dummyReports2: ReportWithoutId[] = [
+  {
+    imgFullPaths: ['images/Admiralty Park play areas.jpeg'],
+    details: 'There are no Braille signs for people with visual impairments in the public park.',
+    location: { lat: 1.283614, lng: 103.84507 },
+    locationDescription: 'The public park located near the junction of Holland Road and Commonwealth Avenue.',
+    comments: [
+      {
+        author: 'David Lee',
+        content: 'I have trouble finding my way around the park without Braille signs.',
+        createdAt: 1623333537000,
+      },
+      {
+        author: 'Rachel Tan',
+        content: 'This is a serious issue. The park should be accessible for everyone.',
+        createdAt: 1623333547000,
+      },
+    ],
+    likes: 3,
+    type: 'Visual impairment',
+  },
+  {
+    imgFullPaths: ['images/alliance_francaise.jpeg'],
+    details: 'The audio system in the movie theater is not compatible with hearing aids.',
+    location: { lat: 1.299229, lng: 103.760827 },
+    locationDescription: 'The movie theater located near the junction of Beach Road and North Bridge Road.',
+    comments: [
+      {
+        author: 'William Tan',
+        content: 'I have trouble enjoying movies at this theater because of the audio system.',
+        createdAt: 1623333557000,
+      },
+      {
+        author: 'Amanda Lee',
+        content: 'Same here. This is a major inconvenience for people with auditory issues.',
+        createdAt: 1623333567000,
+      },
+    ],
+    likes: 2,
+    type: 'Auditory issues',
+  },
+  {
+    imgFullPaths: ['images/public-transport-singapore-bus-interior-900x643.webp'],
+    details: 'There are no audio announcements in the bus for people with visual impairments.',
+    location: { lat: 1.298564, lng: 103.841312 },
+    locationDescription: 'The bus stop located near the junction of Orchard Road and Paterson Road.',
+    comments: [
+      {
+        author: 'James Lee',
+        content: 'I have trouble knowing when my stop is coming up without audio announcements.',
+        createdAt: 1623333577000,
+      },
+      {
+        author: 'Emily Tan',
+        content:
+          'This is a major inconvenience for people with visual impairments. The bus should have audio announcements.',
+        createdAt: 1623333587000,
+      },
+    ],
+    likes: 1,
+    type: 'Visual impairment',
+  },
+];
+
 export const seedReports = async () => {
-  return await Promise.all(dummyReports.map((report) => uploadReport(report)));
+  return await Promise.all(dummyReports2.map((report) => uploadReport(report)));
 };

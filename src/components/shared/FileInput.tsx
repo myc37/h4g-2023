@@ -11,9 +11,11 @@ const FileInput: FC<Props> = ({ setFile }) => {
   return (
     <Box>
       {filePreview ? (
-        <Box display="flex" height="100px" bg="primary.50" p="8px" gap="16px">
+        <Box display="flex" height="100px" bg="primary.100" p="8px" gap="16px">
           <img src={filePreview} alt={filePreview} key={filePreview} />
-          <Text alignSelf="center">{fileName}</Text>
+          <Text alignSelf="center" w="full" textOverflow="ellipsis" overflow="hidden">
+            {fileName}
+          </Text>
           <BxX
             cursor="pointer"
             _hover={{ color: 'red.500' }}
