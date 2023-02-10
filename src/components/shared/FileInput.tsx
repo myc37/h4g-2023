@@ -27,7 +27,7 @@ const FileInput: FC<Props> = ({ setFile }) => {
           />
         </Box>
       ) : (
-        <Button as="label" cursor="pointer" leftIcon={<BxPlus />}>
+        <Button as="label" cursor="pointer" leftIcon={<BxPlus />} variant="outline" colorScheme="primary">
           <Input
             hidden
             type="file"

@@ -51,7 +51,9 @@ const SubmitReport: FC<Props> = ({}) => {
   return (
     <Box display="flex" flexDir="column" gap="24px">
       <Box>
-        <FormLabel>Upload photos</FormLabel>
+        <Text textStyle="subhead-1" mb="12px">
+          Upload photos
+        </Text>
         <Box display="flex" flexDir="column" gap="16px">
           {files.map((file, idx) => (
             <FileInput
@@ -68,7 +70,9 @@ const SubmitReport: FC<Props> = ({}) => {
         </Box>
       </Box>
       <Box>
-        <FormLabel>Provide details of the issue</FormLabel>
+        <Text textStyle="subhead-1" mb="12px">
+          Provide details of the issue
+        </Text>
         <Textarea
           value={details}
           onChange={(event) => setDetails(event.target.value)}
@@ -76,15 +80,17 @@ const SubmitReport: FC<Props> = ({}) => {
         />
       </Box>
       <Box>
-        <FormLabel mb="0">Where did you see it?</FormLabel>
-        <Text textStyle="caption-2" mb="8px">
+        <Text textStyle="subhead-1">Where did you see it?</Text>
+        <Text textStyle="caption-2" mb="12px">
           Please allow the website to acess your current location
         </Text>
         <Button
           leftIcon={location ? <BxCheck /> : <BxCurrentLocation />}
           onClick={getCurrentLocation}
-          colorScheme={location ? 'green' : 'primary'}
+          colorScheme={location ? 'secondary' : 'primary'}
           isLoading={loadingLocation}
+          isDisabled={Boolean(location)}
+          variant={location ? 'solid' : 'outline'}
         >
           At my current location
         </Button>
@@ -103,14 +109,19 @@ const SubmitReport: FC<Props> = ({}) => {
         ) : null} */}
       </Box>
       <Box>
-        <FormLabel>Beside/ Near to/ at...</FormLabel>
+        <Text textStyle="subhead-1" mb="12px">
+          Beside/ Near to/ at...
+        </Text>
+
         <Input
           value={locationDescription}
           onChange={(event) => setLocationDescription(event.target.value)}
           placeholder="e.g. On the steps to the main road"
         />
       </Box>
-      <Button onClick={handleUploadReport}>Submit Report</Button>
+      <Button onClick={handleUploadReport} colorScheme="primary" w="fit-content">
+        Submit Report
+      </Button>
     </Box>
   );
 };

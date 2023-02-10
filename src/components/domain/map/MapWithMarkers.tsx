@@ -2,8 +2,7 @@ import { FC, useState, useCallback, memo, CSSProperties } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
 import { MarkerMetadata } from '~/types/markers';
 import { fetchMarkers } from '~/api/markers';
-import { Heading, Stack } from '@chakra-ui/react';
-import { Button, Link } from '@opengovsg/design-system-react';
+import { Heading, Stack, Button, Link } from '@chakra-ui/react';
 
 type Props = {};
 

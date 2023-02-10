@@ -5,6 +5,7 @@ import Main from '~/components/root/Main';
 import { colors } from '~/styles/colors';
 import { textStyles } from '~/styles/textStyles';
 import { ReportProvider } from '../contexts/ReportContext';
+import 'inter-ui/inter.css';
 
 export const App = () => {
   const theme = extendTheme({ textStyles, colors });
