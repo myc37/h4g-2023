@@ -39,36 +39,40 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
     >
       {id === activeMarkerId ? (
         <InfoWindow onCloseClick={() => setActiveMarkerId(null)}>
-          <Stack p="4px">
-            <Text textStyle="subhead-2" noOfLines={2}>
+          <Box display="flex" flexDir="column" p="4px" maxW="400px">
+            <Text textStyle="subhead-2" noOfLines={2} mb="12px">
               {locationDescription}
             </Text>
             {downloadUrls && downloadUrls.length ? (
-              <Slide transitionDuration={250}>
-                {downloadUrls.map((url) => (
-                  <Box as="img" w="full" key={url} src={url} />
-                ))}
-              </Slide>
+              <Box mb="12px">
+                <Slide transitionDuration={250}>
+                  {downloadUrls.map((url) => (
+                    <Box as="img" rounded="md" w="full" key={url} src={url} />
+                  ))}
+                </Slide>
+              </Box>
             ) : null}
-            <Text noOfLines={4}>{details}</Text>
-            <Box display="flex" gap="8px">
+            <Text noOfLines={4} mb="12px">
+              {details}
+            </Text>
+            <Box display="flex" gap={{ base: '8px', md: '12px' }}>
               <Button
                 onClick={handleClickLike}
-                size="xs"
-                px="24px"
+                size={{ base: 'xs', md: 'sm' }}
+                flex="0 0 fit-content"
                 leftIcon={liked ? <BxLikeS /> : <BxLike />}
                 variant={liked ? 'solid' : 'outline'}
                 colorScheme="primary"
               >
                 {`${likes + (liked ? 1 : 0)} like${likes !== 1 ? 's' : ''}`}
               </Button>
-              <Button size="xs" w="full" colorScheme="secondary">
-                <Link href="/" target="_blank">
+              <Button size={{ base: 'xs', md: 'sm' }} flex="1 0 fit-content" colorScheme="secondary">
+                <Link href={`report/${id}`} target="_blank" rel="noreferrer">
                   View discussion
                 </Link>
               </Button>
             </Box>
-          </Stack>
+          </Box>
         </InfoWindow>
       ) : (
         <></>

@@ -7,7 +7,7 @@ const Navbar: FC<Props> = ({}) => {
   return (
     <Box as="nav" px="24px" py="16px" display="flex" alignItems="center" gap="24px" bg="primary.50">
       <Link href="/">
-        <Box as="img" src="mapable-logo.png" h="20px" />
+        <Box as="img" src="/mapable-logo.png" h="20px" />
       </Link>
       <Button ml="auto" colorScheme="primary" variant="outline">
         <Link href="/report">Report</Link>
