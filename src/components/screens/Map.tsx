@@ -4,11 +4,7 @@ import MapWithMarkers from '../domain/map/MapWithMarkers';
 type Props = {};
 
 const Map: FC<Props> = ({}) => {
-  return (
-    <div>
-      <MapWithMarkers />
-    </div>
-  );
+  return <MapWithMarkers />;
 };
 
 export default Map;
