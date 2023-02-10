@@ -40,7 +40,7 @@ const MapWithMarkers: FC<Props> = ({}) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey={import.meta.env.GOOGLE_API_KEY}>
+    <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
