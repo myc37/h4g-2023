@@ -19,7 +19,6 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
   const { id, location, details, locationDescription, imgFullPaths, likes } = report;
   const { downloadUrls } = useImages(imgFullPaths);
   const [liked, setLiked] = useState(false);
-
   const handleClickLike = async () => {
     if (!liked) {
       setLiked(true);
@@ -44,12 +43,13 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
             <Text textStyle="subhead-2" noOfLines={2}>
               {locationDescription}
             </Text>
-            <Slide transitionDuration={250}>
-              {downloadUrls && downloadUrls.length
-                ? downloadUrls.map((url) => <Box as="img" w="full" key={url} src={url} />)
-                : null}
-            </Slide>
-
+            {downloadUrls && downloadUrls.length ? (
+              <Slide transitionDuration={250}>
+                {downloadUrls.map((url) => (
+                  <Box as="img" w="full" key={url} src={url} />
+                ))}
+              </Slide>
+            ) : null}
             <Text noOfLines={4}>{details}</Text>
             <Box display="flex" gap="8px">
               <Button

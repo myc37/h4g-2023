@@ -32,6 +32,7 @@ const SubmitReport: FC<Props> = ({}) => {
       location,
       locationDescription,
       comments: [],
+      likes: 0,
     };
 
     const { id } = await uploadReport(reportWithoutId);

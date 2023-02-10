@@ -2,6 +2,7 @@ import { FC, useState, useCallback, memo, CSSProperties, useEffect } from 'react
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import useReportState from '~/components/contexts/ReportContext';
 import MarkerWithWindow from './MarkerWithWindow';
+import { useSearchParams } from 'react-router-dom';
 
 type Props = {};
 
@@ -17,6 +18,8 @@ const center: google.maps.LatLngLiteral = {
 
 const MapWithMarkers: FC<Props> = ({}) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
   const {
     state: { reports },
   } = useReportState();
@@ -41,6 +44,16 @@ const MapWithMarkers: FC<Props> = ({}) => {
       map.fitBounds(bounds);
     }
   }, [map, reports]);
+
+  useEffect(() => {
+    if (id) {
+      const selectedReport = reports.find((report) => report.id === id);
+      if (selectedReport) {
+        setActiveMarkerId(id);
+        map?.panTo(selectedReport.location);
+      }
+    }
+  }, [id, reports]);
 
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
