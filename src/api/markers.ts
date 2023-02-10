@@ -2,6 +2,9 @@ import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { useFirestore } from '~/lib/firebase';
 import type { MarkerMetadata, MarkerMetadataWithoutId } from '~/types/markers';
 
+/**
+ * @deprecated
+ */
 export const fetchMarkers = async () => {
   const db = useFirestore();
 
@@ -14,6 +17,9 @@ export const fetchMarkers = async () => {
   return markers;
 };
 
+/**
+ * @deprecated
+ */
 export const uploadMarker = async (markerWithoutId: MarkerMetadataWithoutId) => {
   const db = useFirestore();
 

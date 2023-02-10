@@ -1,8 +1,7 @@
 import { FC, useState, useCallback, memo, CSSProperties } from 'react';
-import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
-import { MarkerMetadata } from '~/types/markers';
-import { fetchMarkers } from '~/api/markers';
-import { Heading, Stack, Button, Link } from '@chakra-ui/react';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import useReportState from '~/components/contexts/ReportContext';
+import MarkerWithWindow from './MarkerWithWindow';
 
 type Props = {};
 
@@ -18,15 +17,14 @@ const center: google.maps.LatLngLiteral = {
 
 const MapWithMarkers: FC<Props> = ({}) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markers, setMarkers] = useState<MarkerMetadata[]>([]);
+  const {
+    state: { reports },
+  } = useReportState();
   const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
 
   const onLoad = useCallback(async (map: google.maps.Map) => {
-    const markersFromDb = await fetchMarkers();
-    setMarkers(markersFromDb);
-
     const bounds = new window.google.maps.LatLngBounds(center);
-    markersFromDb.forEach((marker) => bounds.extend(marker.location));
+    reports.forEach((report) => bounds.extend(report.location));
     map.fitBounds(bounds);
     setMap(map);
   }, []);
@@ -44,33 +42,20 @@ const MapWithMarkers: FC<Props> = ({}) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
+        // zoom={12}
         onLoad={onLoad}
         onUnmount={onUnmount}
         onClick={onClick}
       >
         <>
-          {markers.map(({ id, location, title }) => (
-            <Marker
-              key={id}
-              position={location}
-              onClick={() => {
-                map?.panTo(location);
-                setActiveMarkerId(id);
-              }}
-            >
-              {id === activeMarkerId ? (
-                <InfoWindow onCloseClick={() => setActiveMarkerId(null)}>
-                  <Stack p={1}>
-                    <Heading fontSize="sm">{title}</Heading>
-                    <Link href="/" target="_blank">
-                      <Button size="xs">View</Button>
-                    </Link>
-                  </Stack>
-                </InfoWindow>
-              ) : (
-                <></>
-              )}
-            </Marker>
+          {reports.map((report) => (
+            <MarkerWithWindow
+              key={report.id}
+              report={report}
+              activeMarkerId={activeMarkerId}
+              setActiveMarkerId={setActiveMarkerId}
+              map={map}
+            />
           ))}
         </>
       </GoogleMap>
