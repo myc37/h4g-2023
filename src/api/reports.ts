@@ -1,6 +1,6 @@
-import { addDoc, collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore';
-import { useFirestore } from '~/lib/firebase';
-import { Report, ReportWithoutId } from '~/types/reports';
+import { addDoc, arrayUnion, collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore';
+import { firebaseApp, useFirestore } from '~/lib/firebase';
+import { Comment, CommentWithoutCreatedAt, Report, ReportWithoutId } from '~/types/reports';
 
 export const fetchReports = async () => {
   const db = useFirestore();
@@ -28,7 +28,6 @@ const updateReport = async (id: string, updates: Partial<Record<keyof Report, an
   const db = useFirestore();
   const reportDocRef = doc(db, 'reports', id);
   const newReportDocRef = await updateDoc(reportDocRef, updates);
-
   return newReportDocRef;
 };
 
@@ -38,4 +37,10 @@ export const likeReport = async (id: string) => {
 
 export const unlikeReport = async (id: string) => {
   return await updateReport(id, { likes: increment(-1) });
+};
+
+export const commentOnReport = async (id: string, comment: CommentWithoutCreatedAt) => {
+  // TODO: Change to Firebase timestamp
+  const commentWithCreatedAt = { ...comment, createdAt: Date.now() };
+  return await updateReport(id, { comments: arrayUnion(commentWithCreatedAt) });
 };

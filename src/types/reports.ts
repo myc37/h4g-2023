@@ -1,8 +1,10 @@
 export type Comment = {
   author: string;
   content: string;
-  createdAt: string;
+  createdAt: number;
 };
+
+export type CommentWithoutCreatedAt = Omit<Comment, 'createdAt'>;
 
 export type Report = {
   id: string;

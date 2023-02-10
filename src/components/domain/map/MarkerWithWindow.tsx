@@ -1,12 +1,12 @@
-import { Stack, Button, Link, Text, Box } from '@chakra-ui/react';
+import { Button, Link, Text, Box } from '@chakra-ui/react';
 import { Marker, InfoWindow } from '@react-google-maps/api';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
-import { useImages } from '~/hooks/useImages';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Report } from '~/types/reports';
-import { Slide } from 'react-slideshow-image';
 import BxLike from '~/components/icons/BxLike';
 import BxLikeS from '~/components/icons/BxLikeS';
 import { likeReport, unlikeReport } from '~/api/reports';
+import ImageSlider from '~/components/shared/ImageSlider';
+import { useLocalStorageLikes } from '~/hooks/useLocalStorageLikes';
 
 type Props = {
   report: Report;
@@ -17,14 +17,14 @@ type Props = {
 
 const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId, map }) => {
   const { id, location, details, locationDescription, imgFullPaths, likes } = report;
-  const { downloadUrls } = useImages(imgFullPaths);
-  const [liked, setLiked] = useState(false);
+  const { localLikes, liked, locallyLike, locallyUnlike } = useLocalStorageLikes(id, likes);
+
   const handleClickLike = async () => {
     if (!liked) {
-      setLiked(true);
+      locallyLike();
       await likeReport(id);
     } else {
-      setLiked(false);
+      locallyUnlike();
       await unlikeReport(id);
     }
   };
@@ -43,15 +43,7 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
             <Text textStyle="subhead-2" noOfLines={2} mb="12px">
               {locationDescription}
             </Text>
-            {downloadUrls && downloadUrls.length ? (
-              <Box mb="12px">
-                <Slide transitionDuration={250}>
-                  {downloadUrls.map((url) => (
-                    <Box as="img" rounded="md" w="full" key={url} src={url} />
-                  ))}
-                </Slide>
-              </Box>
-            ) : null}
+            <ImageSlider imgFullPaths={imgFullPaths} mb="12px" />
             <Text noOfLines={4} mb="12px">
               {details}
             </Text>
@@ -64,7 +56,7 @@ const MarkerWithWindow: FC<Props> = ({ report, activeMarkerId, setActiveMarkerId
                 variant={liked ? 'solid' : 'outline'}
                 colorScheme="primary"
               >
-                {`${likes + (liked ? 1 : 0)} like${likes !== 1 ? 's' : ''}`}
+                {`${localLikes} like${localLikes !== 1 ? 's' : ''}`}
               </Button>
               <Button size={{ base: 'xs', md: 'sm' }} flex="1 0 fit-content" colorScheme="secondary">
                 <Link href={`report/${id}`} target="_blank" rel="noreferrer">

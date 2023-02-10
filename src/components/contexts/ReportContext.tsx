@@ -9,10 +9,12 @@ type ReportActions = {
 
 type ReportState = {
   reports: Report[];
+  status: 'loading' | 'loaded';
 };
 
 const initialReportState: ReportState = {
   reports: [],
+  status: 'loading',
 };
 
 const ReportReducer = (state: ReportState, action: ReportActions): ReportState => {
@@ -20,6 +22,7 @@ const ReportReducer = (state: ReportState, action: ReportActions): ReportState =
     case 'SET_REPORTS':
       return {
         ...state,
+        status: 'loaded',
         reports: action.payload,
       };
   }
@@ -49,7 +52,15 @@ export default function useReportState() {
     handleFetchReports();
   }, []);
 
+  const getReportById = (id: string | undefined) => {
+    if (id) {
+      return state.reports.find((report) => report.id === id);
+    }
+  };
+
   return {
+    isLoading: state.status === 'loading',
     state,
+    getReportById,
   };
 }
