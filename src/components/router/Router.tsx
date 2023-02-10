@@ -8,6 +8,7 @@ const Page404Screen = lazy(() => import('~/components/screens/404'));
 const ReportScreen = lazy(() => import('~/components/screens/Report'));
 const MapScreen = lazy(() => import('~/components/screens/Map'));
 const ViewReportScreen = lazy(() => import('~/components/screens/ViewReport'));
+const SeedScreen = lazy(() => import('~/components/screens/Seed'));
 
 export const Router = () => {
   return (
@@ -39,6 +40,7 @@ const InnerRouter = () => {
           index: true,
           element: <IndexScreen />,
         },
+        { path: '/seed', element: <SeedScreen /> },
         {
           path: '*',
           element: <Page404Screen />,

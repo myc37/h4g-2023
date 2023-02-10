@@ -1,6 +1,6 @@
 import { addDoc, arrayUnion, collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore';
-import { firebaseApp, useFirestore } from '~/lib/firebase';
-import { Comment, CommentWithoutCreatedAt, Report, ReportWithoutId } from '~/types/reports';
+import { useFirestore } from '~/lib/firebase';
+import { CommentWithoutCreatedAt, Report, ReportWithoutId } from '~/types/reports';
 
 export const fetchReports = async () => {
   const db = useFirestore();
