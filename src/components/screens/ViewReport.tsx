@@ -19,7 +19,7 @@ const Report: FC<Props> = ({}) => {
   }
 
   return (
-    <Box bg="primary.50" px="24px" minH="100vh" pb="40px">
+    <Box bg="primary.50" px="24px" minH="100vh" pb="40px" display="flex" justifyContent="center">
       <Box maxW="1140px" w="full">
         <SingleReport report={report} />
       </Box>
