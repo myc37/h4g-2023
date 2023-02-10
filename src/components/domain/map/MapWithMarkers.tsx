@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import useReportState from '~/components/contexts/ReportContext';
 import MarkerWithWindow from './MarkerWithWindow';
 import { useSearchParams } from 'react-router-dom';
+import MapControl from './MapControl';
 
 type Props = {};
 
@@ -58,6 +59,7 @@ const MapWithMarkers: FC<Props> = ({}) => {
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
       <GoogleMap mapContainerStyle={containerStyle} zoom={12} onLoad={onLoad} onUnmount={onUnmount} onClick={onClick}>
+        <MapControl position="RIGHT_BOTTOM" setActiveMarkerId={setActiveMarkerId} />
         <>
           {reports.map((report) => (
             <MarkerWithWindow
