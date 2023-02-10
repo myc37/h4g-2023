@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, memo, CSSProperties } from 'react';
+import { FC, useState, useCallback, memo, CSSProperties, useEffect } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import useReportState from '~/components/contexts/ReportContext';
 import MarkerWithWindow from './MarkerWithWindow';
@@ -23,9 +23,6 @@ const MapWithMarkers: FC<Props> = ({}) => {
   const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
 
   const onLoad = useCallback(async (map: google.maps.Map) => {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    reports.forEach((report) => bounds.extend(report.location));
-    map.fitBounds(bounds);
     setMap(map);
   }, []);
 
@@ -37,16 +34,17 @@ const MapWithMarkers: FC<Props> = ({}) => {
     setActiveMarkerId(null);
   };
 
+  useEffect(() => {
+    if (map) {
+      const bounds = new window.google.maps.LatLngBounds(center);
+      reports.forEach((report) => bounds.extend(report.location));
+      map.fitBounds(bounds);
+    }
+  }, [map, reports]);
+
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        // zoom={12}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        onClick={onClick}
-      >
+      <GoogleMap mapContainerStyle={containerStyle} zoom={12} onLoad={onLoad} onUnmount={onUnmount} onClick={onClick}>
         <>
           {reports.map((report) => (
             <MarkerWithWindow

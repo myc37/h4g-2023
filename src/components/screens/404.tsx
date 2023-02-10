@@ -1,10 +1,10 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { Head } from '~/components/shared/Head';
 
 function Page404() {
   return (
     <Box bg="primary.50" px="24px">
-      <Container maxW="1140px">
+      <Box w="full" maxW="1140px">
         <Head title="The page is not found" />
         <div className="hero min-h-screen bg-gray-800">
           <div className="text-center hero-content text-3xl font-bold">
@@ -18,7 +18,7 @@ function Page404() {
             </div>
           </div>
         </div>
-      </Container>
+      </Box>
     </Box>
   );
 }
