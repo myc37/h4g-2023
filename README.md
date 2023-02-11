@@ -1,3 +1,5 @@
+# Storybook
+
 # MapAble
 
 > MapAble helps individuals improve accessibility for the disability community. Report non-accessibility areas, join the conversation and make a difference.
@@ -8,9 +10,11 @@ MapAble is a web application that helps the disability community in Singapore by
 
 ## Try it out!
 
-(MapAble Web App)[https://mapable-raypuff.vercel.app/]
-(DevPost Link)[https://devpost.com/software/mapable-h1vqfc]
-(Video Demo)[https://www.youtube.com/watch?v=c4uZr2zCLBw&embeds_euri=https%3A%2F%2Fdevpost.com%2F&source_ve_path=MjM4NTE&feature=emb_title&ab_channel=NVijay]
+MapAble was built for NUS GDSC [Hack for Good 2023](https://dsc.comp.nus.edu.sg/hack4good).
+
+[MapAble Web App](https://mapable-raypuff.vercel.app/)
+[DevPost Submission](https://devpost.com/software/mapable-h1vqfc)
+[Video Demo](https://www.youtube.com/watch?v=c4uZr2zCLBw&embeds_euri=https%3A%2F%2Fdevpost.com%2F&source_ve_path=MjM4NTE&feature=emb_title&ab_channel=NVijay)
 
 ## How we built it 🛠️
 
