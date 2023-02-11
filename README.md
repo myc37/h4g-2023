@@ -2,7 +2,7 @@
 
 # MapAble
 
-> MapAble helps individuals improve accessibility for the disability community. Report non-accessibility areas, join the conversation and make a difference.
+> MapAble was built for **Pillar 1** (by SG Enable) of Hack for Good 2023. It helps individuals improve accessibility for the disability community. Report non-accessibility areas, join the conversation and make a difference.
 
 ## What it does 🧐
 
