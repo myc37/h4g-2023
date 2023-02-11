@@ -6,6 +6,12 @@
 
 MapAble is a web application that helps the disability community in Singapore by **enabling users to report and map** areas in their neighbourhood that are **not accessibility-friendly**. This helps to create a **visual representation** of the challenges faced by the community and **sparks conversation** around potential solutions.
 
+## Try it out!
+
+(MapAble Web App)[https://mapable-raypuff.vercel.app/]
+(DevPost Link)[https://devpost.com/software/mapable-h1vqfc]
+(Video Demo)[https://www.youtube.com/watch?v=c4uZr2zCLBw&embeds_euri=https%3A%2F%2Fdevpost.com%2F&source_ve_path=MjM4NTE&feature=emb_title&ab_channel=NVijay]
+
 ## How we built it 🛠️
 
 We built MapAble using the following tech stack: React, TypeScript, Firebase, Chakra UI, and the Google Maps API. This stack was chosen for its scalability, robustness, and ease of use. This allowed us to create an intuitive and interactive platform for users to easily report issues and engage with each other.
