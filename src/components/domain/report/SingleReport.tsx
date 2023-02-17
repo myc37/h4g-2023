@@ -120,7 +120,7 @@ const SingleReport: FC<Props> = ({ report }) => {
             <Text textStyle="subhead-1" mb="8px">
               Details
             </Text>
-            <Text noOfLines={4} textStyle="body-1" whiteSpace="pre-wrap" mb="12px">
+            <Text textStyle="body-1" whiteSpace="pre-wrap" mb="12px">
               {details}
             </Text>
           </Box>
